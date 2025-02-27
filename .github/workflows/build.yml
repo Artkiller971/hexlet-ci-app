@@ -9,10 +9,13 @@ jobs:
       # Клонируем репозиторий
       - uses: actions/checkout@v4
       # Устанавливаем Node.js
-      - uses: actions/setup-node@v4
+      - name: setup node
+        uses: actions/setup-node@v4
+        with:
+          cache: 'npm'
       # Ставим зависимости
-      - name: app setup
-        run: make setup
+      - name: npm install
+        run: make install
       # Запускаем линтер
       - name: run linter
         run: make lint
@@ -21,3 +24,5 @@ jobs:
       # имя выводится на Github при просмотре сборки
       - name: run tests
         run: make test # name и run относятся к одной задаче, поэтому дефис ставится только перед name
+      # Кастомный action от Хекслета
+      - uses: hexlet-components/hello-from-hexlet-action@release
