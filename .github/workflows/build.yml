@@ -1,0 +1,23 @@
+# Пример для проекта на Node.js
+name: build
+on: push
+jobs:
+  build: # имя взято для примера
+    runs-on: ubuntu-latest
+
+    steps:
+      # Клонируем репозиторий
+      - uses: actions/checkout@v4
+      # Устанавливаем Node.js
+      - uses: actions/setup-node@v4
+      # Ставим зависимости
+      - name: app setup
+        run: make setup
+      # Запускаем линтер
+      - name: run linter
+        run: make lint
+      # Запускаем тесты
+      # у шагов может быть имя, иногда это помогает отладке
+      # имя выводится на Github при просмотре сборки
+      - name: run tests
+        run: make test # name и run относятся к одной задаче, поэтому дефис ставится только перед name
